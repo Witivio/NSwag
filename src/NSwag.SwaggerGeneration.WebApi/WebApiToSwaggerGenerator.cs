@@ -17,6 +17,8 @@ using NJsonSchema.Infrastructure;
 using NSwag.SwaggerGeneration.Processors.Contexts;
 using NSwag.SwaggerGeneration.WebApi.Infrastructure;
 
+
+
 namespace NSwag.SwaggerGeneration.WebApi
 {
     /// <summary>Generates a <see cref="SwaggerDocument"/> object for the given Web API class type. </summary>

@@ -175,6 +175,10 @@
       <Project>{37ae85de-b127-4861-b925-1a67a35f314a}</Project>
       <Name>NSwag.Demo.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NSwag.SwaggerGeneration.AzureFunction\NSwag.SwaggerGeneration.AzureFunction.csproj">
+      <Project>{FE2E3ADE-FC6D-488D-B050-34B7B25E027B}</Project>
+      <Name>NSwag.SwaggerGeneration.AzureFunction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NSwag.SwaggerGeneration.WebApi\NSwag.SwaggerGeneration.WebApi.csproj">
       <Project>{8A547CB0-930F-466D-92EB-E780FF14C0A6}</Project>
       <Name>NSwag.SwaggerGeneration.WebApi</Name>

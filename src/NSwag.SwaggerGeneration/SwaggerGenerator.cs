@@ -136,6 +136,24 @@ namespace NSwag.SwaggerGeneration
         /// <param name="name">The name.</param>
         /// <param name="parameter">The parameter.</param>
         /// <returns></returns>
+        public async Task<SwaggerParameter> CreateBodyParameterAsync(string name, Type bodyType)
+        {
+            var isRequired = true;
+
+            var typeDescription = JsonObjectTypeDescription.FromType(bodyType, ResolveContract(bodyType),null, _settings.DefaultEnumHandling);
+            var operationParameter = new SwaggerParameter
+            {
+                Name = name,
+                Kind = SwaggerParameterKind.Body,
+                IsRequired = isRequired,
+                IsNullableRaw = typeDescription.IsNullable,
+                Schema = await GenerateAndAppendSchemaFromTypeAsync(bodyType, !isRequired, null).ConfigureAwait(false),
+            };
+
+            operationParameter.Description = bodyType.Name;//await parameterbodyTypeGetDescriptionAsync(parameter.GetCustomAttributes()).ConfigureAwait(false);
+            return operationParameter;
+        }
+
         public async Task<SwaggerParameter> CreateBodyParameterAsync(string name, ParameterInfo parameter)
         {
             var isRequired = IsParameterRequired(parameter);

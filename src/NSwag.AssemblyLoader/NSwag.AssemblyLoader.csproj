@@ -36,6 +36,7 @@
     <Compile Include="..\NSwag.AssemblyLoaderCore\Infrastructure\AssemblyLoader.cs" Link="Infrastructure\AssemblyLoader.cs" />
     <Compile Include="..\NSwag.AssemblyLoaderCore\NSwagDocument.cs" Link="NSwagDocument.cs" />
     <Compile Include="..\NSwag.AssemblyLoaderCore\SwaggerGenerators\AssemblyTypeToSwaggerGenerator.cs" Link="SwaggerGenerators\AssemblyTypeToSwaggerGenerator.cs" />
+    <Compile Include="..\NSwag.AssemblyLoaderCore\SwaggerGenerators\AzureFunction\AzureFunctionAssemblyToSwaggerGenerator.cs" Link="SwaggerGenerators\AzureFunction\AzureFunctionAssemblyToSwaggerGenerator.cs" />
     <Compile Include="..\NSwag.AssemblyLoaderCore\SwaggerGenerators\WebApi\WebApiAssemblyToSwaggerGenerator.cs" Link="SwaggerGenerators\WebApi\WebApiAssemblyToSwaggerGenerator.cs" />
     <Compile Include="..\NSwag.AssemblyLoaderCore\Utilities\PathUtilities.cs" Link="Utilities\PathUtilities.cs" />
   </ItemGroup>
@@ -43,7 +44,11 @@
     <ProjectReference Include="..\NSwag.Annotations\NSwag.Annotations.csproj" />
     <ProjectReference Include="..\NSwag.Commands\NSwag.Commands.csproj" />
     <ProjectReference Include="..\NSwag.Core\NSwag.Core.csproj" />
+    <ProjectReference Include="..\NSwag.SwaggerGeneration.AzureFunction\NSwag.SwaggerGeneration.AzureFunction.csproj" />
     <ProjectReference Include="..\NSwag.SwaggerGeneration.WebApi\NSwag.SwaggerGeneration.WebApi.csproj" />
     <ProjectReference Include="..\NSwag.SwaggerGeneration\NSwag.SwaggerGeneration.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SwaggerGenerators\AzureFunction\" />
   </ItemGroup>
 </Project>

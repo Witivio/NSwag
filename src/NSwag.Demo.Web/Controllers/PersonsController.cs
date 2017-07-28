@@ -12,9 +12,82 @@ using NSwag.Annotations;
 using NSwag.Demo.Web.Models;
 using NSwag.SwaggerGeneration.WebApi;
 
+namespace Witivio
+{
+    public class RouteAttribute : Attribute
+    {
+        public string Template { get; set; }
+        public RouteAttribute(string template)
+        {
+            this.Template = template;
+        }
+    }
+}
+
+
+
 namespace NSwag.Demo.Web.Controllers
 {
+  
+    public class Function1
+    {
+        [NSwag.Annotations.SwaggerResponse(HttpStatusCode.OK, typeof(MyClass))]
+        [NSwag.Annotations.SwaggerOperation("MicroService1_GetAll")]
+        [Witivio.Route("/api/service1/all")]
+        public static async Task<HttpResponseMessage> Get(HttpRequestMessage req, TraceWriter log)
+        {
+            //var response = await req.Content.ReadAsAsync<ProActiveMessageResponse>();
+            string jwt = req.Headers.Authorization.Parameter;
+
+
+
+            return req.CreateResponse(HttpStatusCode.OK);
+        }
+    }
+
+    public class Function2
+    {
+        [NSwag.Annotations.SwaggerResponse(HttpStatusCode.OK, typeof(MyClass))]
+        [NSwag.Annotations.SwaggerOperation("MicroService1_GetById")]
+        [Witivio.Route("/api/service1/{id:alpha}")]
+        public static async Task<HttpResponseMessage> Get(HttpRequestMessage req, string id, TraceWriter log)
+        {
+            //var response = await req.Content.ReadAsAsync<ProActiveMessageResponse>();
+            string jwt = req.Headers.Authorization.Parameter;
+
+
+
+            return req.CreateResponse(HttpStatusCode.OK);
+        }
+    }
+
+    public class Function3
+    {
+        [NSwag.Annotations.SwaggerResponse(HttpStatusCode.OK, typeof(void))]
+        [NSwag.Annotations.SwaggerOperation("MicroService1_Save")]
+        [NSwag.Annotations.SwaggerOperationBody(typeof(MyClassParameter))]
+        [Witivio.Route("/api/service1/{id}/save")]
+        public static async Task<HttpResponseMessage> Post(HttpRequestMessage req, string id, TraceWriter log)
+        {
+            //var response = await req.Content.ReadAsAsync<ProActiveMessageResponse>();
+            string jwt = req.Headers.Authorization.Parameter;
+
+
+
+            return req.CreateResponse(HttpStatusCode.OK);
+        }
+    }
+
+    public class TraceWriter
+    {
+    }
+
     public class MyClass
+    {
+        public string Foo { get; set; }
+    }
+
+    public class MyClassParameter
     {
         public string Foo { get; set; }
     }

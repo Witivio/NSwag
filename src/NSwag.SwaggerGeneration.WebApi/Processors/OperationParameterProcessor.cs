@@ -22,6 +22,8 @@ using NSwag.SwaggerGeneration.WebApi.Infrastructure;
 
 namespace NSwag.SwaggerGeneration.WebApi.Processors
 {
+
+
     /// <summary>Generates the operation's parameters.</summary>
     public class OperationParameterProcessor : IOperationProcessor
     {
@@ -41,7 +43,25 @@ namespace NSwag.SwaggerGeneration.WebApi.Processors
         {
             var httpPath = context.OperationDescription.Path;
             var parameters = context.MethodInfo.GetParameters().ToList();
-            foreach (var parameter in parameters.Where(p => p.ParameterType != typeof(CancellationToken) &&
+
+            var operationAttribute = context.MethodInfo.GetCustomAttributes().Where(a => a.GetType().Name == "SwaggerOperationBodyAttribute").FirstOrDefault();
+
+            var bodyType = operationAttribute.TryGetPropertyValue<Type>("Body", null);
+
+            var bodyInfo = JsonObjectTypeDescription.FromType(bodyType, _settings.ResolveContract(bodyType), null, _settings.DefaultEnumHandling);
+
+            if (bodyInfo.IsComplexType)
+            {
+                var operationParameter = await context.SwaggerGenerator.CreateBodyParameterAsync("body", bodyType).ConfigureAwait(false);
+                context.OperationDescription.Operation.Parameters.Add(operationParameter);
+                //  await AddBodyParameterAsync(bodyParameterName, parameter, context.OperationDescription.Operation, context.SwaggerGenerator).ConfigureAwait(false);
+                //else
+                //    await AddPrimitiveParametersFromUriAsync(httpPath, uriParameterName, context.OperationDescription.Operation, parameter, parameterInfo, context.SwaggerGenerator).ConfigureAwait(false);
+            }
+
+
+
+            foreach (var parameter in parameters.Where(p => p.ParameterType != typeof(CancellationToken) && p.ParameterType.Name != "TraceWriter" && p.ParameterType.Name != "HttpRequestMessage" &&
                                                             p.GetCustomAttributes().All(a => a.GetType().Name != "SwaggerIgnoreAttribute") &&
                                                             p.GetCustomAttributes().All(a => a.GetType().Name != "FromServicesAttribute") &&
                                                             p.GetCustomAttributes().All(a => a.GetType().Name != "BindNeverAttribute")))

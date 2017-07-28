@@ -11,6 +11,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NJsonSchema.Generation;
 using NSwag.SwaggerGeneration.WebApi.Processors;
+using NSwag.SwaggerGeneration.WebApi;
+
+
 
 namespace NSwag.SwaggerGeneration.WebApi
 {

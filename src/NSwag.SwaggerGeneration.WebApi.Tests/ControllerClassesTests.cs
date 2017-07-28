@@ -5,6 +5,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NSwag.SwaggerGeneration.WebApi.Processors.Security;
+using NSwag.SwaggerGeneration.AzureFunction;
+using NSwag.SwaggerGeneration.AzureFunctions;
 
 namespace NSwag.SwaggerGeneration.WebApi.Tests
 {
@@ -123,6 +126,32 @@ namespace NSwag.SwaggerGeneration.WebApi.Tests
 
             //// Act
             var document = await generator.GenerateForControllersAsync(new[] { "NonExistingClass" }); // Should throw exception
+
+            //// Assert
+        }
+
+
+        [TestMethod]
+
+        public async Task toto()
+        {
+            var assemblyPath = "../../../NSwag.Demo.Web/bin/NSwag.Demo.Web.dll";
+            //// Arrange
+            var settings = new AzureFunctionAssemblyToSwaggerGeneratorSettings
+            {
+                AssemblyPaths = new[] { assemblyPath },
+               // DefaultUrlTemplate = "api/{controller}/{action}/{id}",
+                Description = "Witivio API",
+                Title = "Witivio",
+              
+            };
+
+            var generator = new AzureFunctionAssemblyToSwaggerGenerator(settings);
+
+            //// Act
+            var document = await generator.GenerateForFunctionsAsync(new[] { "NSwag.Demo.Web.Controllers.Function3" }); // Should throw exception
+           
+            var swaggerSpecification = document.ToJson();
 
             //// Assert
         }

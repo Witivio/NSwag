@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NSwag.Commands\NSwag.Commands.csproj" />
     <ProjectReference Include="..\NSwag.Core\NSwag.Core.csproj" />
+    <ProjectReference Include="..\NSwag.SwaggerGeneration.AzureFunction\NSwag.SwaggerGeneration.AzureFunction.csproj" />
     <ProjectReference Include="..\NSwag.SwaggerGeneration.WebApi\NSwag.SwaggerGeneration.WebApi.csproj" />
     <ProjectReference Include="..\NSwag.SwaggerGeneration\NSwag.SwaggerGeneration.csproj" />
   </ItemGroup>
